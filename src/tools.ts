@@ -5,6 +5,13 @@ export const tools = {
   generateDiagram: tool({
     description:
       "Generate a complete diagram as an array of Excalidraw elements. Use this when the user asks you to create, draw, or design a new diagram. Return all elements needed including shapes, text labels, and arrows/lines connecting them. Position elements with x,y coordinates and give each a unique id.",
+
+    // Guaranteer that the input schema from the LLM will return the elements in the shape and schema we defined.
+    execute: async ({ elements }) => {
+      return { elements };
+    },
+
+    // We have the input schema so we can validate the input.
     inputSchema: z.object({
       elements: z.object(
         z.object({
